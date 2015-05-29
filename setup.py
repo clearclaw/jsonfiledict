@@ -8,7 +8,7 @@ __version__, __version_info__ = pyver.get_version (pkg = "jsondict")
 setup (name = "jsondict",
   version = __version__,
   description = "A dict optionally backed by an auto-updating JSON file.",
-  long_description = "A dict optionally backed by an auto-updating JSON file.",
+  long_description = file ("README.rst").read (),
   classifiers = [],
   keywords = "",
   author = "J C Lawrence",
@@ -19,12 +19,10 @@ setup (name = "jsondict",
   package_data = {
   },
   zip_safe = True,
-  install_requires = [
-    "logtool",
-    "pyver",
-  ],
+  install_requires = [line.strip ()
+                      for line in file ("requirements.txt").readlines ()],
   entry_points = {
-    "console_scripts": [
+      "console_scripts": [
       ],
-    },
-  )
+  },
+)
