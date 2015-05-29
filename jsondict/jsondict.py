@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 
 import json, logtool, os
+from atomictempfile import AtomicTempFile
 
 class JsonDict (dict):
 
@@ -36,7 +37,7 @@ class JsonDict (dict):
     if str (self) == self.__cache and not force:
       return
     if self.fname:
-      with open (self.fname, "w") as f:
+      with AtomicTempFile (self.fname, mode = "w") as f:
         f.write (json.dumps (self, indent = 2))
       self.file_time = os.path.getmtime (self.fname)
     self.__cache = str (self)
@@ -54,7 +55,7 @@ class JsonDict (dict):
     dict.__setitem__ (self, key, val, **kwargs)
     self.save ()
 
-  @logtool.log_call (log_args = False, log_rc = False)
+  # @logtool.log_call (log_args = False, log_rc = False)
   def __getattribute__ (self, name):
     attr = object.__getattribute__ (self, name)
     if hasattr (attr, '__call__'): # It it callable?
