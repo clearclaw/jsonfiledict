@@ -1,10 +1,10 @@
 #! /usr/bin/env python
 
-import json, os
-from logtool import log_func
+import json, logtool, os
 
 class JsonDict (dict):
-  @log_func
+
+  @logtool.log_call (log_args = False, log_rc = False)
   def __init__ (self, fname, *args):
     self.__cache = None
     self.__loaded = False
@@ -15,14 +15,14 @@ class JsonDict (dict):
     dict.__init__ (self, *args)
     self.save ()
 
-  @log_func
+  @logtool.log_call (log_args = False, log_rc = False)
   def __stale (self):
     return (self.fname
             and (not os.path.isfile (self.fname) or
                  (os.path.isfile (self.fname)
                   and self.file_time != os.path.getmtime (self.fname))))
 
-  @log_func
+  @logtool.log_call (log_args = False, log_rc = False)
   def load (self, force = False):
     if self.__stale () or force:
       if os.path.isfile (self.fname):
@@ -31,7 +31,7 @@ class JsonDict (dict):
             self, json.loads (f.read ()))
         self.file_time = os.path.getmtime (self.fname)
 
-  @log_func
+  @logtool.log_call (log_args = False, log_rc = False)
   def save (self, force = False):
     if str (self) == self.__cache and not force:
       return
@@ -41,20 +41,20 @@ class JsonDict (dict):
       self.file_time = os.path.getmtime (self.fname)
     self.__cache = str (self)
 
-  @log_func
+  @logtool.log_call (log_args = False, log_rc = False)
   def __getitem__ (self, key):
     if not self.__loaded:
       self.load ()
     return dict.__getitem__ (self, key)
 
-  @log_func
+  @logtool.log_call (log_args = False, log_rc = False)
   def __setitem__ (self, key, val, **kwargs):
     if not self.__loaded:
       self.load ()
     dict.__setitem__ (self, key, val, **kwargs)
     self.save ()
 
-  @log_func
+  @logtool.log_call (log_args = False, log_rc = False)
   def __getattribute__ (self, name):
     attr = object.__getattribute__ (self, name)
     if hasattr (attr, '__call__'): # It it callable?
