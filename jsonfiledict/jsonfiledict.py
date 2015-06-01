@@ -3,7 +3,7 @@
 import json, logtool, os
 from atomictempfile import AtomicTempFile
 
-class JsonDict (dict):
+class JsonFileDict (dict):
 
   @logtool.log_call (log_args = False, log_rc = False)
   def __init__ (self, fname, *args):
