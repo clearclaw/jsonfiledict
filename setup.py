@@ -8,7 +8,7 @@ __version__, __version_info__ = pyver.get_version (
     public = True)
 
 setup (
-    name = "jsondict.py",
+    name = "jsondict",
     version = __version__,
     description = "A dict optionally backed by an auto-updating JSON file.",
     long_description = file ("README.rst").read (),
