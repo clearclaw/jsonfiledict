@@ -72,3 +72,10 @@ class JsonFileDict (dict):
       return wrapper
     else:
       return attr
+
+  @logtool.log_call (log_args = False, log_rc = False)
+  def json (self):
+    s = json.dumps (dict (self), indent = 2, encoding = "utf-8")
+    if isinstance (s, unicode):
+      s = s.encode ('utf-8')
+    return s
