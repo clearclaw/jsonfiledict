@@ -16,7 +16,7 @@ class JsonFileDict (dict):
     dict.__init__ (self, *args)
     self.save ()
 
-  @logtool.log_call (log_args = False, log_rc = False)
+  # @logtool.log_call (log_args = False, log_rc = False)
   def __stale (self):
     return (self.fname
             and (not os.path.isfile (self.fname) or
@@ -42,13 +42,13 @@ class JsonFileDict (dict):
       self.file_time = os.path.getmtime (self.fname)
     self.__cache = str (self)
 
-  @logtool.log_call (log_args = False, log_rc = False)
+  # @logtool.log_call (log_args = False, log_rc = False)
   def __getitem__ (self, key):
     if not self.__loaded:
       self.load ()
     return dict.__getitem__ (self, key)
 
-  @logtool.log_call (log_args = False, log_rc = False)
+  # @logtool.log_call (log_args = False, log_rc = False)
   def __setitem__ (self, key, val, **kwargs):
     if not self.__loaded:
       self.load ()
