@@ -17,7 +17,7 @@ setup (
     author = "J C Lawrence",
     author_email = "claw@kanga.nu",
     url = "http://kanga.nu/~claw/",
-    license = "GPL v3",
+    license = "LGPL v3",
     packages = find_packages (exclude = ["tests",]),
     package_data = {
     },
