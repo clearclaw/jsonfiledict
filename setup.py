@@ -1,17 +1,14 @@
+#! /usr/bin/env python
+
 from setuptools import setup, find_packages
-
-__version__ = "unknown"
-
-import pyver
-__version__, __version_info__ = pyver.get_version (
-    pkg = "jsonfiledict",
-    public = True)
+import versioneer
 
 setup (
     name = "jsonfiledict",
-    version = __version__,
+    version = versioneer.get_version (),                
     description = "A dict optionally backed by an auto-updating JSON file.",
     long_description = file ("README.rst").read (),
+    cmdclass = versioneer.get_cmdclass (),
     classifiers = [],
     keywords = "",
     author = "J C Lawrence",
